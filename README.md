@@ -26,6 +26,8 @@ Search for text "SUB foo" in all .INC files in current directory:
 Search for text "foo$()" in directory "bar" (and subdirectories):
 *xFind "foo$()" bar
 
+If no directory is specified, all files in the current directory (and subdirectories) are searched.
+
 Search is case insensitive.
 
 Required CMM2 firmware version
