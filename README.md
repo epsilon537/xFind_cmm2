@@ -1,17 +1,18 @@
 xFind String Find across Files for CMM2 by Epsilon
 --------------------------------------------------
 
-Current Version: 0.1
+Current Version: 0.2
 
 Changelog
 ---------
 
+0.2: Additional clarification in usage text.
 0.1: Initial Version
 
 Description
 -----------
 
-xFind finds all occurences of a given text string across files specified by a filespec or directory.
+xFind finds all occurrences of a given text string across files specified by a filespec or directory.
 
 Usage
 -----
@@ -26,7 +27,7 @@ Search for text "SUB foo" in all .INC files in current directory:
 Search for text "foo$()" in directory "bar" (and subdirectories):
 *xFind "foo$()" bar
 
-If no directory is specified, all files in the current directory (and subdirectories) are searched.
+If no filespec or directory is specified, all files in the current directory (and subdirectories) are searched.
 
 Search is case insensitive.
 

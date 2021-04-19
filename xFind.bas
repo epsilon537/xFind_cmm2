@@ -2,7 +2,7 @@ OPTION EXPLICIT
 OPTION DEFAULT NONE
 OPTION BASE 0
 
-CONST VERSION$ = "0.1"
+CONST VERSION$ = "0.2"
 CONST DQ$ = CHR$(34) 'Double quote
 CONST PAGE_NUM_LINES% = 40
 CONST ENABLE_PAGING% = 1 'Page every 40 lines
@@ -11,8 +11,9 @@ DIM recursionLevel% = 0
 DIM errCode% = 0
 DIM strToSearch$, fspec$
 DIM startDir$ = CWD$
-DIM pageCounter%=0
-DIM progressCounter%=0
+DIM pageCounter% = 0
+DIM progressCounter% = 0
+DIM matchCounter% = 0 
 
 PRINT
 PRINT "xFind Text Search V"+VERSION$+" by Epsilon"
@@ -48,6 +49,7 @@ ELSEIF (fspec$=".") OR (DIR$(fspec$, DIR) <> "") THEN
   scanDir(strToSearch$, fspec$)
 ENDIF
 
+PRINT @(1) "Number of matches: "+STR$(matchCounter%)
 PRINT @(1) "Done."
 
 endProg:
@@ -107,6 +109,7 @@ SUB scanFile(strToSearch$, filename$)
     IF MM.ERRNO = 0 THEN
       IF INSTR(UCASE$(line$), UCASE$(strToSearch$)) THEN
         PRINT @(1) CWD$+"/"filename$+" "+STR$(lineNbr%)+": "+line$
+        INC matchCounter%
         INC pageCounter%
         IF ENABLE_PAGING% AND pageCounter%>=PAGE_NUM_LINES% THEN
           pageCounter%=0
@@ -287,6 +290,10 @@ SUB usage
   PRINT "Search for text "+DQ$+"foo$()"+DQ$+" in directory "+DQ$+"bar"+DQ$+" (and subdirectories):" 
   PRINT "*xFind "+DQ$+"foo$()"+DQ$+" bar"
   PRINT
+  PRINT "If no filespec or directory specified, all files in current directory and subdirectories"
+  PRINT "are searched."
+  PRINT
   PRINT "Search is case insensitive."
   PRINT
 END SUB
+
